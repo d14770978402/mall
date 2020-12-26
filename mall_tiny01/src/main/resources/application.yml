@@ -1,0 +1,37 @@
+server:
+  port: 8080
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/mall_tiny?useUnicode=true&characterEncoding=UTF8&serverTimezone=GMT
+      username: root
+      password: d2396815202
+  redis:
+    host: 192.168.1.103 #服务器连接地址
+    database: 0 #redis数据库索引，默认为0
+    port: 6379 #服务器连接端口
+    password:  #服务器连接密码，默认为0
+    jedis: #连接池
+      pool:
+        max-active: 8 #最大连接数
+        max-idle: 8  #最大空闲连接
+        max-wait: -1ms #最大阻碍时间
+        min-idle: 0 #最小空闲连接
+    timeout: 3000ms #连接超时时间
+redis:
+  key:
+    prefix:
+      authcode: "portal:authCode:"
+    expire:
+      authcode: 120 #验证码超期时间
+mybatis:
+  mapper-locations:
+    -classpath:mapper/*.xml
+    -classpath*:com/**/mapper/*.xml
+jwt:
+  tokenHeader: Authorizetion #jwt存储的请求头
+  secret: mySecret #jwt中的密匙
+  expiration: 604800 #jwt的超期限时间，一天
+  tokenHead: Bearer #jwt负载中拿到的开头

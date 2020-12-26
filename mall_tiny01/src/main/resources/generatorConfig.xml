@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <properties resource="generator.properties"/>
+    <context id="MysqlContext" targetRuntime="Mybatis3" defaultModelType="flat">
+        <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/>
+        <property name="javaFileEncoding" value="utf-8"/>
+<!--        为模型生成序列化，toString方法，生成mapper.xml时覆盖原文件-->
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin"></plugin>
+        <plugin type="org.mybatis.generator.plugins.ToStringPlugin"></plugin>
+        <plugin type="org.mybatis.generator.plugins.UnmergeableXmlMappersPlugin"></plugin>
+        <commentGenerator type="com.deng.malltiny.mbg.CommentGenerator">
+            <!-- 是否去除自动生成的注释 true：s是 ： false:否 -->
+            <property name="suppressAllComments" value="true"/>
+            <property name="suppressDate" value="true"/>
+            <property name="addRemarkComments" value="true"/>
+        </commentGenerator>
+
+        <jdbcConnection driverClass="${jdbc.driverClass}"
+                        connectionURL="${jdbc.connectionURL}"
+                        password="${jdbc.password}"
+                        userId="${jdbc.userId}">
+            <property name="nullCatalogMeansCurrent" value="true" />
+
+        </jdbcConnection>
+        <javaModelGenerator targetPackage="com.deng.malltiny.mbg.model" targetProject="src/main/java"></javaModelGenerator>
+        <sqlMapGenerator targetPackage="com.deng.malltiny.mbg.mapper" targetProject="src/main/resources"></sqlMapGenerator>
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.deng.malltiny.mbg.mapper" targetProject="src/main/java"></javaClientGenerator>
+
+        <!--生成全部表tableName设为%-->
+        <table tableName="pms_brand">
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table>
+        <!--后台用户表-->
+        <table tableName="ums_admin">
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table>
+        <!--后台用户角色表-->
+        <table tableName="ums_role">
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table>
+        <!--后台用户权限表-->
+        <table tableName="ums_permission">
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table>
+        <table tableName="ums_admin_role_relation">
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table>
+        <table tableName="ums_role_permission_relation">
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table>
+        <table tableName="ums_admin_permission_relation">
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table>
+    </context>
+</generatorConfiguration>
